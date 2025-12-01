@@ -76,7 +76,7 @@ function Auth() {
         >
           <Image
             className="hide-on-hover"
-            src="./public/loginL.png"
+            src="./loginL.png"
             fit="contain"
             h={"80%"}
           />
@@ -99,7 +99,7 @@ function Auth() {
             bdrs={"0 10px 10px 0"}
           >
             <Stack justify="center" h="100%">
-              <Image src="./public/logo.svg" mah={"140px"} fit="cover"></Image>
+              <Image src="./logo.svg" mah={"140px"} fit="cover"></Image>
               <Group gap={10} mb={"md"} align="center">
                 <Title order={2}>Welcome</Title>
                 <Group gap={0}>
