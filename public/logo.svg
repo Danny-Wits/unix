@@ -1,0 +1,72 @@
+<svg width="1200" height="400" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="400" fill="#FFFFFF"/>
+
+  <!-- Base heart shape -->
+  <defs>
+    <path id="heart-shape" d="M95 90C85 75 65 72 54 84C44 95 45 116 60 130C72 141 85 150 95 158C105 150 118 141 130 130C145 116 146 95 136 84C125 72 105 75 95 90Z"/>
+  </defs>
+
+  <!-- Random scatter hearts across the rectangle -->
+  <g fill="#d8070b" opacity="0.90">
+    <use href="#heart-shape" transform="translate(50 40) scale(0.17)"/>
+    <use href="#heart-shape" transform="translate(260 30) scale(0.14)"/>
+    <use href="#heart-shape" transform="translate(430 60) scale(0.16)"/>
+    <use href="#heart-shape" transform="translate(680 35) scale(0.13)"/>
+    <use href="#heart-shape" transform="translate(950 60) scale(0.15)"/>
+    <use href="#heart-shape" transform="translate(1120 25) scale(0.13)"/>
+   
+    <use href="#heart-shape" transform="translate(40 180) scale(0.14)"/>
+    <use href="#heart-shape" transform="translate(210 200) scale(0.12)"/>
+    <use href="#heart-shape" transform="translate(460 210) scale(0.14)"/>
+    <use href="#heart-shape" transform="translate(700 180) scale(0.13)"/>
+    <use href="#heart-shape" transform="translate(980 190) scale(0.11)"/>
+
+    <use href="#heart-shape" transform="translate(350 300) scale(0.11)"/>
+    <use href="#heart-shape" transform="translate(640 305) scale(0.13)"/>
+    <use href="#heart-shape" transform="translate(900 310) scale(0.12)"/>
+    <use href="#heart-shape" transform="translate(1130 295) scale(0.13)"/>
+
+   
+    <use href="#heart-shape" transform="translate(540 160) scale(0.1)"/>
+    <use href="#heart-shape" transform="translate(640 140) scale(0.1)"/>
+    <use href="#heart-shape" transform="translate(740 120) scale(0.2)"/>
+    <use href="#heart-shape" transform="translate(840 160) scale(0.15)"/>
+    <use href="#heart-shape" transform="translate(940 140) scale(0.1)"/>
+    <use href="#heart-shape" transform="translate(1040 120) scale(0.1)"/>
+    <use href="#heart-shape" transform="translate(1140 160) scale(0.1)"/>
+
+
+    
+  </g>
+
+  <!-- Shield (moved fully to left edge) -->
+  <path
+    d="M0 80H160V220C160 280 120 318 80 334C40 318 0 280 0 220Z"
+    fill="#d8070b"
+  />
+
+  <!-- Heart inside shield -->
+  <path
+    d="M75 150
+       C65 135 45 132 34 144
+       C24 155 25 176 40 190
+       C52 201 65 210 75 218
+       C85 210 98 201 110 190
+       C125 176 126 155 116 144
+       C105 132 85 135 75 150Z"
+    fill="#FFFFFF"
+  />
+
+  
+
+  <!-- UniX text placed immediately to the right of shield -->
+  <text
+    x="200" y="230"
+    fill="#d8070b"
+    font-size="120"
+    font-weight="700"
+    font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    UniX
+  </text>
+</svg>

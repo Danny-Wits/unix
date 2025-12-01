@@ -1,0 +1,48 @@
+.pulse {
+  animation: pulse 1s infinite;
+  /* background-color: #ffe8e9;
+  background-color: #ffd1d1;
+  background-color: #fba0a0;
+  background-color: #f76d6d;
+  background-color: #f44141;
+  background-color: #f22625;
+  background-color: #f21616;
+  background-color: #d8070b;
+  background-color: #c10007;
+  background-color: #a90003; */
+}
+.pulse-on-hover:hover {
+  color: #d8070b;
+  animation: pulse 1s infinite;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.authBackground {
+  background: linear-gradient(135deg, transparent 60%, red 40%);
+  background-size: 120% 120%;
+  animation: gradient 5s ease-in-out infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
