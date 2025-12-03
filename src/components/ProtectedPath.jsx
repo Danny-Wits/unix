@@ -1,10 +1,11 @@
 import { Navigate } from "react-router";
 import { useSupabase } from "../SupabaseProvider";
+import { WebShell } from "./WebShell";
 
 function ProtectedPath({ children }) {
   const { user } = useSupabase();
   if (!user) return <Navigate to="/" />;
-  return <>{children}</>;
+  return <WebShell>{children}</WebShell>;
 }
 
 export default ProtectedPath;

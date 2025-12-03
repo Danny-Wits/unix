@@ -22,7 +22,7 @@ import {
 } from "react-icons/fa6";
 import { LuEyeClosed } from "react-icons/lu";
 import { Navigate } from "react-router";
-import { login, useSupabase } from "../SupabaseProvider";
+import { login, signup, useSupabase } from "../SupabaseProvider";
 function Auth() {
   const theme = useSafeMantineTheme();
   const { user } = useSupabase();
@@ -141,12 +141,15 @@ function Auth() {
                   <Button
                     fullWidth
                     variant="outline"
+                    type="submit"
                     onClick={() => {
+                      if (loginForm.validate().hasErrors) return;
+                      signup(loginForm.values.email, loginForm.values.password);
                       Notifications.show({
                         message:
-                          "Sign up feature coming soon. Site is under Testing",
+                          "A confirmation email has been sent to your email. Please check your inbox.",
                         color: "white",
-                        title: "Work in progress",
+                        title: "Welcome",
                         icon: <FaHeart size={20} color="red" />,
                       });
                     }}
