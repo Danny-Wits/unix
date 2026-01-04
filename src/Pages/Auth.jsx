@@ -9,24 +9,27 @@ import {
   Text,
   TextInput,
   Title,
+  useMantineColorScheme,
   useSafeMantineTheme,
 } from "@mantine/core";
-import { useForm } from "@mantine/form";
-import { Notifications } from "@mantine/notifications";
-import { CiHeart } from "react-icons/ci";
 import {
   FaEye,
   FaHandHoldingHeart,
   FaHeart,
   FaHeartCirclePlus,
 } from "react-icons/fa6";
+import { login, signup, useSupabase } from "../SupabaseProvider";
+
+import { CiHeart } from "react-icons/ci";
 import { LuEyeClosed } from "react-icons/lu";
 import { Navigate } from "react-router";
-import { login, signup, useSupabase } from "../SupabaseProvider";
+import { Notifications } from "@mantine/notifications";
+import { useForm } from "@mantine/form";
+
 function Auth() {
+  const { colorScheme } = useMantineColorScheme();
   const theme = useSafeMantineTheme();
   const { user } = useSupabase();
-  if (user) return <Navigate to="/Home" />;
   const loginForm = useForm({
     mode: "uncontrolled",
     initialValues: {
@@ -57,6 +60,7 @@ function Auth() {
         }}
       />
     );
+  if (user) return <Navigate to="/Home" />;
   return (
     <Group h="100vh" justify="center" className="authBackground">
       <Center
@@ -99,7 +103,11 @@ function Auth() {
             bdrs={"0 10px 10px 0"}
           >
             <Stack justify="center" h="100%">
-              <Image src="./logo.svg" mah={"140px"} fit="cover"></Image>
+              <Image
+                src={colorScheme == "dark" ? "./logodark.svg" : "./logo.svg"}
+                mah={"140px"}
+                fit="cover"
+              ></Image>
               <Group gap={10} mb={"md"} align="center">
                 <Title order={2}>Welcome</Title>
                 <Group gap={0}>

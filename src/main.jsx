@@ -11,6 +11,7 @@ import ProtectedPath from "./components/ProtectedPath.jsx";
 import "./index.css";
 import Auth from "./Pages/Auth.jsx";
 import Home from "./Pages/Home.jsx";
+import ProfileSetup from "./Pages/ProfileSetup.jsx";
 import { SupabaseProvider } from "./SupabaseProvider.tsx";
 
 const router = createBrowserRouter([
@@ -23,6 +24,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedPath>
         <Home></Home>
+      </ProtectedPath>
+    ),
+  },
+  {
+    path: "/ProfileSetup",
+    element: (
+      <ProtectedPath>
+        <ProfileSetup />
       </ProtectedPath>
     ),
   },
@@ -47,21 +56,21 @@ const theme = createTheme({
   primaryColor: "hotRed",
 });
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
-      <SupabaseProvider>
-        <Notifications />
-        <QueryClientProvider client={queryClient}>
+      <Notifications />
+      <QueryClientProvider client={queryClient}>
+        <SupabaseProvider>
           <RouterProvider router={router}></RouterProvider>
           <ReactQueryDevtools
             initialIsOpen={false}
             buttonPosition="bottom-left"
           />
-        </QueryClientProvider>
-      </SupabaseProvider>
+        </SupabaseProvider>
+      </QueryClientProvider>
     </MantineProvider>
   </StrictMode>
 );
