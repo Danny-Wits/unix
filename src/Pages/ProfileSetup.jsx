@@ -3,27 +3,35 @@ import {
   Button,
   Center,
   FileButton,
-  MultiSelect,
+  Group,
   NumberInput,
   Select,
   Stack,
   Text,
-  TextInput,
   Textarea,
+  TextInput,
   Title,
 } from "@mantine/core";
-import { genders, interests } from "../const";
+import { useHover, useViewportSize } from "@mantine/hooks";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { genders } from "../const";
 import {
   getProfile,
   getProfilePicPath,
   setProfile,
   uploadProfilePic,
 } from "../func";
-import { useHover, useViewportSize } from "@mantine/hooks";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { CiEdit } from "react-icons/ci";
 import { useForm } from "@mantine/form";
+import { CiEdit } from "react-icons/ci";
+import {
+  FiCalendar,
+  FiCamera,
+  FiFileText,
+  FiUpload,
+  FiUser,
+  FiUsers,
+} from "react-icons/fi";
 import { useSupabase } from "../SupabaseProvider";
 
 function ProfileSetup() {
@@ -41,15 +49,11 @@ function ProfileSetup() {
       age: profile?.age || 18,
       gender: profile?.gender || "male",
       bio: profile?.bio || "",
-      interests: profile?.interests || [],
     },
     validate: {
       full_name: (value) => (value ? null : "Full name is required"),
       age: (value) => (value ? null : "Age is required"),
       gender: (value) => (value ? null : "Gender is required"),
-      bio: (value) => (value ? null : "Bio is required"),
-      interests: (value) =>
-        value.length > 0 ? null : "Interests are required",
     },
   });
   const { mutate: submitMutation, isPending } = useMutation({
@@ -68,6 +72,7 @@ function ProfileSetup() {
   const { data: profilePicPath } = useQuery({
     queryKey: ["profilePicPath"],
     queryFn: () => getProfilePicPath(user?.id),
+    refetchOnWindowFocus: false,
   });
   const { hovered, ref } = useHover();
   const { width } = useViewportSize();
@@ -76,6 +81,8 @@ function ProfileSetup() {
   return (
     <Stack align="center">
       <Title>Profile Setup</Title>
+
+      {/* Profile Picture */}
       <Stack align="center">
         <FileButton
           onChange={(file) => uploadProfilePic(file, user?.id)}
@@ -92,60 +99,62 @@ function ProfileSetup() {
                 name={user?.email.split("@")[0]}
                 {...props}
               >
-                {hovered && <CiEdit size={24} />}
+                {hovered && <CiEdit size={26} />}
               </Avatar>
+
               {(hovered || isMobile) && (
-                <>
-                  <Text size=" xs">Click to Change Profile Pic</Text>
-                </>
+                <Group gap="xs" mt="xs">
+                  <FiCamera size={14} />
+                  <Text size="xs">Click to change profile picture</Text>
+                </Group>
               )}
             </>
           )}
         </FileButton>
       </Stack>
-      <Center w={"80%"}>
+
+      {/* Form */}
+      <Center w="80%">
         <form
           onSubmit={profileSetupForm.onSubmit(submitMutation)}
           className="form"
         >
           <Stack>
             <TextInput
-              label="Full Name"
+              label={<FieldLabel icon={FiUser} text="Full Name" />}
               placeholder="Write your full name"
               maxLength={50}
-              required
               {...profileSetupForm.getInputProps("full_name")}
             />
+
             <NumberInput
-              label="Age"
+              label={<FieldLabel icon={FiCalendar} text="Age" />}
               placeholder="18"
-              required
               min={18}
               max={120}
               {...profileSetupForm.getInputProps("age")}
             />
+
             <Select
-              label="Gender"
-              placeholder="Select Gender"
-              required
+              label={<FieldLabel icon={FiUsers} text="Gender" />}
+              placeholder="Select gender"
               data={genders}
               {...profileSetupForm.getInputProps("gender")}
             />
+
             <Textarea
-              label="Bio"
-              maxLength={200}
-              placeholder="Write something about yourself"
-              required
+              label={<FieldLabel icon={FiFileText} text="Bio" />}
+              placeholder="Write your bio"
+              maxLength={250}
               {...profileSetupForm.getInputProps("bio")}
             />
-            <MultiSelect
-              label="Interests"
-              placeholder="Select Interests"
-              required
-              data={interests}
-              {...profileSetupForm.getInputProps("interests")}
-            />
-            <Button fullWidth loading={isPending} type="submit">
+
+            <Button
+              fullWidth
+              loading={isPending}
+              type="submit"
+              leftSection={<FiUpload size={16} />}
+            >
               Upload
             </Button>
           </Stack>
@@ -156,3 +165,14 @@ function ProfileSetup() {
 }
 
 export default ProfileSetup;
+// eslint-disable-next-line no-unused-vars
+function FieldLabel({ icon: Icon, text }) {
+  return (
+    <Group gap="xs">
+      <Icon size={18} />
+      <Text size="sm" fw={500}>
+        {text}
+      </Text>
+    </Group>
+  );
+}

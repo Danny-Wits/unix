@@ -12,6 +12,7 @@ import "./index.css";
 import Auth from "./Pages/Auth.jsx";
 import Home from "./Pages/Home.jsx";
 import ProfileSetup from "./Pages/ProfileSetup.jsx";
+import Traits from "./Pages/Traits.jsx";
 import { SupabaseProvider } from "./SupabaseProvider.tsx";
 
 const router = createBrowserRouter([
@@ -32,6 +33,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedPath>
         <ProfileSetup />
+      </ProtectedPath>
+    ),
+  },
+  {
+    path: "/Traits",
+    element: (
+      <ProtectedPath>
+        <Traits />
       </ProtectedPath>
     ),
   },

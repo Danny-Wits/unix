@@ -56,5 +56,32 @@ export const uploadProfilePic = async (pic, id) => {
 export const getProfilePicPath = (id) => {
   const path = `${id}/avatar.png`;
   const { data } = supabase.storage.from("profile-pics").getPublicUrl(path);
-  return `${data.publicUrl}?t=${Date.now()}`;
+  // return `${data.publicUrl}?t=${Date.now()}`;
+  return data.publicUrl;
+};
+export const getTraits = async (id) => {
+  const { data: traits, error } = await supabase
+    .from("traits")
+    .select("*")
+    .eq("id", id)
+    .single();
+  if (error) showErrorNotification(error.message);
+  return traits;
+};
+export const setTraits = async (traits) => {
+  const { data, error } = await supabase
+    .from("traits")
+    .upsert(traits, { onConflict: "id" })
+    .select("*");
+  if (error) showErrorNotification("Error updating traits");
+  return data;
+};
+
+export const profileCompletion = (profile) => {
+  let profileCompletionPercentage = 0;
+  if (profile?.full_name) profileCompletionPercentage += 25;
+  if (profile?.age) profileCompletionPercentage += 25;
+  if (profile?.gender) profileCompletionPercentage += 25;
+  if (profile?.bio) profileCompletionPercentage += 25;
+  return profileCompletionPercentage;
 };
