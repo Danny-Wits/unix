@@ -36,10 +36,10 @@ export function WebShell({ children }) {
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
-        <Box hiddenFrom="sm">
+        <Box hiddenFrom="sm" h={"100%"}>
           <NavMob toggle={toggleMobile}></NavMob>
         </Box>
-        <Box visibleFrom="sm">
+        <Box visibleFrom="sm" h={"100%"}>
           <NavPC toggle={toggleDesktop}></NavPC>
         </Box>
       </AppShell.Navbar>

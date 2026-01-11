@@ -1,6 +1,7 @@
-import { Avatar, Group, Stack, Text } from "@mantine/core";
+import { Avatar, Button, Group, Stack, Text } from "@mantine/core";
+import { FiLogOut } from "react-icons/fi";
 import { useNavigate } from "react-router";
-import { useSupabase } from "../SupabaseProvider";
+import { logout, useSupabase } from "../SupabaseProvider";
 import { paths } from "../const";
 import { getProfilePicPath } from "../func";
 
@@ -10,9 +11,14 @@ function NavMob({ toggle }) {
   const navigate = useNavigate();
   const name = user?.email.split("@")[0];
   return (
-    <Stack>
+    <Stack h={"100%"}>
       <Group align="center" p={5}>
-        <Avatar src={getProfilePicPath(user?.id)} name={name} size="md" color="initials"></Avatar>
+        <Avatar
+          src={getProfilePicPath(user?.id)}
+          name={name}
+          size="md"
+          color="initials"
+        ></Avatar>
         <Text size="sm" fw={"bold"}>
           {name}
         </Text>
@@ -20,6 +26,15 @@ function NavMob({ toggle }) {
       {Object.keys(paths).map((path) =>
         createLink(paths[path], navigate, toggle)
       )}
+      <Button
+        mt="auto"
+        leftSection={<FiLogOut />}
+        fullWidth
+        onClick={logout}
+        variant="outline"
+      >
+        Logout
+      </Button>
     </Stack>
   );
 }
