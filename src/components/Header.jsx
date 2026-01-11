@@ -17,8 +17,8 @@ function Header() {
     <Group>
       <Image
         src="login.png"
-        w={44}
-        height={44}
+        w={42}
+        height={42}
         fit="scale-down"
         bdrs={"50%"}
         display={"inline-block"}
