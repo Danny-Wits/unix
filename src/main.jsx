@@ -6,45 +6,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router";
-import ProtectedPath from "./components/ProtectedPath.jsx";
+import { RouterProvider } from "react-router";
 import "./index.css";
-import Auth from "./Pages/Auth.jsx";
-import Home from "./Pages/Home.jsx";
-import ProfileSetup from "./Pages/ProfileSetup.jsx";
-import Traits from "./Pages/Traits.jsx";
+import router from "./router.jsx";
 import { SupabaseProvider } from "./SupabaseProvider.tsx";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Auth />,
-  },
-  {
-    path: "/Home",
-    element: (
-      <ProtectedPath>
-        <Home></Home>
-      </ProtectedPath>
-    ),
-  },
-  {
-    path: "/ProfileSetup",
-    element: (
-      <ProtectedPath>
-        <ProfileSetup />
-      </ProtectedPath>
-    ),
-  },
-  {
-    path: "/Traits",
-    element: (
-      <ProtectedPath>
-        <Traits />
-      </ProtectedPath>
-    ),
-  },
-]);
 const hotRed = [
   "#ffe8e9",
   "#ffd1d1",

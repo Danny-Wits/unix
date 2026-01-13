@@ -1,22 +1,27 @@
-import { CiHome } from "react-icons/ci";
-import { FaGear, FaPerson } from "react-icons/fa6";
+import { FaGear, FaHouse, FaPerson } from "react-icons/fa6";
 export const paths = {
   home: {
     path: "/Home",
     label: "Home",
-    icon: CiHome,
+    icon: FaHouse,
     callBack: () => {},
   },
 
   profile: {
     path: "/ProfileSetup",
-    label: "Profile Setup",
+    label: "Profile",
     icon: FaPerson,
     callBack: () => {},
   },
   traits: {
     path: "/Traits",
     label: "Traits",
+    icon: FaGear,
+    callBack: () => {},
+  },
+  preferences: {
+    path: "/Preferences",
+    label: "Preferences",
     icon: FaGear,
     callBack: () => {},
   },

@@ -37,7 +37,9 @@ export const login = (email: string, password: string) => {
 export const signup = (email: string, password: string) => {
   supabase.auth.signUp({ email, password });
 };
-export const logout = () => supabase.auth.signOut();
+export const logout = () => {
+  supabase.auth.signOut();
+};
 
 export const useSupabase = () => useContext(SupabaseContext);
 

@@ -10,7 +10,6 @@ import {
   Text,
   Textarea,
   TextInput,
-  Title,
 } from "@mantine/core";
 import { useHover, useViewportSize } from "@mantine/hooks";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -33,6 +32,7 @@ import {
   FiUsers,
 } from "react-icons/fi";
 import { useSupabase } from "../SupabaseProvider";
+import HeadTitle from "../components/HeadTitle";
 
 function ProfileSetup() {
   const { user } = useSupabase();
@@ -80,9 +80,8 @@ function ProfileSetup() {
 
   return (
     <Stack align="center">
-      <Title>Profile Setup</Title>
+      <HeadTitle title="Profile" subtitle="Edit your profile" />
 
-      {/* Profile Picture */}
       <Stack align="center">
         <FileButton
           onChange={(file) => uploadProfilePic(file, user?.id)}
@@ -94,8 +93,9 @@ function ProfileSetup() {
                 ref={ref}
                 src={profilePicPath}
                 size="200px"
-                radius="lg"
+                radius="50%"
                 color="initials"
+                bd={"2px solid"}
                 name={user?.email.split("@")[0]}
                 {...props}
               >

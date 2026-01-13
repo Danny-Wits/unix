@@ -9,11 +9,15 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import { notifications } from "@mantine/notifications";
 import { useQuery } from "@tanstack/react-query";
 import { Navigate, useNavigate } from "react-router";
 import { paths } from "../const";
-import { getProfile, getTraits, profileCompletion } from "../func";
+import {
+  getPreferences,
+  getProfile,
+  getTraits,
+  profileCompletion,
+} from "../func";
 import { useSupabase } from "../SupabaseProvider";
 
 function Home() {
@@ -23,11 +27,18 @@ function Home() {
     queryFn: () => getProfile(user?.id),
     enabled: !!user,
   });
-  const { data: _ } = useQuery({
+  //Preloading
+  useQuery({
     queryKey: ["traits"],
     queryFn: () => getTraits(user?.id),
     enabled: !!user?.id,
   });
+  useQuery({
+    queryKey: ["preferences"],
+    queryFn: () => getPreferences(user?.id),
+    enabled: !!user?.id,
+  });
+
   const navigate = useNavigate();
   const profilePercentage = profileCompletion(profile);
   if (profile?.profile_complete === false)
@@ -87,7 +98,7 @@ function Home() {
           title="Looking For"
           description="Clarify expectations and intent."
           action="Set Preferences"
-          onClick={() => notifications.show({ message: "Feature coming soon" })}
+          onClick={() => navigate(paths.preferences.path)}
         />
       </SimpleGrid>
 

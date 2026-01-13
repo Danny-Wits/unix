@@ -85,3 +85,22 @@ export const profileCompletion = (profile) => {
   if (profile?.bio) profileCompletionPercentage += 25;
   return profileCompletionPercentage;
 };
+
+export const getPreferences = async (id) => {
+  const { data: preferences, error } = await supabase
+    .from("preferences")
+    .select("*")
+    .eq("id", id)
+    .single();
+  if (error) showErrorNotification(error.message);
+  return preferences;
+};
+
+export const setPreferences = async (preferences) => {
+  const { data, error } = await supabase
+    .from("preferences")
+    .upsert(preferences, { onConflict: "id" })
+    .select("*");
+  if (error) showErrorNotification("Error updating preferences");
+  return data;
+};
