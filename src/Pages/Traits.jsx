@@ -40,6 +40,7 @@ function Traits() {
   const { mutate: submitMutation } = useMutation({
     mutationKey: ["setTraits"],
     mutationFn: async (values) => {
+      if (!traits?.id) return;
       await setTraits({
         ...values,
         id: user?.id,

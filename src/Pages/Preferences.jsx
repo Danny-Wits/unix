@@ -47,6 +47,7 @@ function Preferences() {
   const { mutate: submitMutation } = useMutation({
     mutationKey: ["setPreferences"],
     mutationFn: async (values) => {
+      if (!preferences?.id) return;
       await setPreferences({
         ...values,
         id: user?.id,
