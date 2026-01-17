@@ -23,7 +23,7 @@ function Header() {
         bdrs={"50%"}
         display={"inline-block"}
       ></Image>
-      <Title order={2}>Uni X</Title>
+      <Title order={2}>UniX</Title>
       <FaHeart color="red" size={28} className="pulse" />
 
       <ActionIcon
